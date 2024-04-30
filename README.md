@@ -1,3 +1,3 @@
-# React + TypeScript + Vite
+# Věčná Ječná
 
 The forum which shall never emerge.
