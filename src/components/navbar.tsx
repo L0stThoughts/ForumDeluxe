@@ -1,5 +1,6 @@
 import "../scss/bootstrap.scss";
 import skullImg from "../images/skull.png";
+import React from "react";
 
 export const Navbar = () => {
   return (
