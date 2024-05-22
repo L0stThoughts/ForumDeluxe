@@ -11,7 +11,7 @@
     "emitDeclarationOnly": true
   },
   "include": [
-    "vite.config.ts", // Add vite.config.ts
+    "vite.config.ts",
     "src/**/*.ts",
     "src/**/*.jsx",
     "src/**/*.tsx",

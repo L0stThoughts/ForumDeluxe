@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
+import './modal.scss';
 
-export const RegisterForm: React.FC = () => {
+interface RegisterModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string>('');
@@ -20,7 +26,7 @@ export const RegisterForm: React.FC = () => {
       if (response.ok) {
         // Registration successful
         setError('');
-        // Optionally, redirect the user to another page
+        onClose();
       } else {
         // Registration failed
         const data = await response.json();
@@ -33,11 +39,18 @@ export const RegisterForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
-      <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
-      <button type="submit">Register</button>
-      {error && <p>{error}</p>}
-    </form>
+    <div className={`modal ${isOpen ? 'open' : ''}`}>
+      <div className="modal-content">
+        <span className="close" onClick={onClose}>&times;</span>
+        <form onSubmit={handleSubmit}>
+          <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
+          <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
+          <button type="submit">Register</button>
+          {error && <p>{error}</p>}
+        </form>
+      </div>
+    </div>
   );
 };
+
+export default RegisterModal;
