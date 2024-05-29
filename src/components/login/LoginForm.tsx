@@ -1,42 +1,29 @@
 import React, { useState } from "react";
 import "../../scss/bootstrap.scss";
 import RegisterModal from "./RegisterModal";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../profile/AuthContent";
 
 export const LoginForm: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string>("");
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (response.ok) {
-        // Login successful
-        setError("");
-        // Optionally, redirect the user to another page
-      } else {
-        // Login failed
-        const data = await response.json();
-        setError(data.message || "Login failed");
-      }
-    } catch (error) {
-      // Network or server error
-      setError("Login failed. Please try again later.");
+      await login(username, password);
+      navigate("/profile");
+    } catch (error: any) {
+      setError(error.message);
     }
   };
 
   const handleRegisterClick = () => {
-    console.log("Register button clicked");
     setIsRegisterModalOpen(true);
   };
 
@@ -47,11 +34,12 @@ export const LoginForm: React.FC = () => {
           <div className="col-8 px-0 d-flex">
             <div className="form-group mb-0 flex-grow-1">
               <input
-                type="username"
+                type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="Email"
+                placeholder="Username"
                 className="form-control form-control-sm rounded-0"
+                required
               />
             </div>
             <div className="form-group mb-0 flex-grow-1">
@@ -61,6 +49,7 @@ export const LoginForm: React.FC = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
                 className="form-control form-control-sm rounded-0"
+                required
               />
             </div>
           </div>
