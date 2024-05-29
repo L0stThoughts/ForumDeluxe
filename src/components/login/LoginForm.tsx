@@ -29,7 +29,7 @@ export const LoginForm: React.FC = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="form-inline">
+      <form onSubmit={handleSubmit} className="form-inline m-0">
         <div className="row mx-0">
           <div className="col-8 px-0 d-flex">
             <div className="form-group mb-0 flex-grow-1">

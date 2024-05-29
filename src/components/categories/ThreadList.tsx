@@ -1,11 +1,13 @@
 import React from 'react';
-import Thread from './Thread';
-import "./forum.scss";
+import { Link } from 'react-router-dom';
+import './forum.scss';
 
 interface Thread {
+  id: number;
   title: string;
   content: string;
   category: string;
+  link: string;
 }
 
 interface ThreadListProps {
@@ -14,9 +16,11 @@ interface ThreadListProps {
 
 const ThreadList: React.FC<ThreadListProps> = ({ threads }) => {
   return (
-    <div>
-      {threads.map((thread, index) => (
-        <Thread key={index} thread={thread} />
+    <div className="post-list">
+      {threads.map((thread) => (
+        <div key={thread.id} className="post">
+          <Link to={thread.link}>{thread.title}</Link>
+        </div>
       ))}
     </div>
   );

@@ -19,7 +19,7 @@ const NewThread: React.FC<NewThreadFormProps> = ({ addThread }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
-        <label htmlFor="title" className="form-label">
+        <label htmlFor="title" className="form-label text-light">
           Title
         </label>
         <input
@@ -32,7 +32,7 @@ const NewThread: React.FC<NewThreadFormProps> = ({ addThread }) => {
         />
       </div>
       <div className="mb-3">
-        <label htmlFor="content" className="form-label">
+        <label htmlFor="content" className="form-label text-light">
           Content
         </label>
         <textarea
@@ -46,7 +46,7 @@ const NewThread: React.FC<NewThreadFormProps> = ({ addThread }) => {
           required
         ></textarea>
       </div>
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" className="btn btn-dark">
         Post Thread
       </button>
     </form>
