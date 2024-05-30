@@ -11,7 +11,7 @@ Vite: A build tool that aims to provide a faster and leaner development experien
 
 ## How to Install and Use
 Clone the repository:
-git clone <repository-url>
+git clone {url}
 
 ## Install dependencies:
 npm install
