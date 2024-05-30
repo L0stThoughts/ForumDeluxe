@@ -1,4 +1,4 @@
-## Forum Deluxe
+# Forum Deluxe
 Function of the Webpage
 Forum Deluxe is a forum application where users can discuss various topics, post questions, and share information.
 
