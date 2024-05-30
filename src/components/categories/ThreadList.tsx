@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Container, Row, Col } from 'react-bootstrap';
 import './forum.scss';
 
 interface Thread {
@@ -16,13 +17,19 @@ interface ThreadListProps {
 
 const ThreadList: React.FC<ThreadListProps> = ({ threads }) => {
   return (
-    <div className="post-list">
-      {threads.map((thread) => (
-        <div key={thread.id} className="post">
-          <Link to={thread.link}>{thread.title}</Link>
-        </div>
-      ))}
-    </div>
+    <Container>
+      <br />
+      <p className="text-light">Posted threads:</p>
+      <Row>
+        {threads.map((thread) => (
+          <Col key={thread.id} xs={12} sm={6} md={4} lg={3} className="mb-2">
+            <Link to={thread.link} className="text-decoration-none text-light">
+              {thread.title}
+            </Link>
+          </Col>
+        ))}
+      </Row>
+    </Container>
   );
 };
 

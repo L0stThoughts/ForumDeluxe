@@ -12,8 +12,9 @@ interface Thread {
   link: string;
 }
 
+const randomString = Math.random().toString(36).substring(2, 15);
+
 const generateRandomLink = (category: string) => {
-  const randomString = Math.random().toString(36).substring(2, 15);
   return `/category/${category}/${randomString}`;
 };
 
@@ -45,7 +46,7 @@ const Forum: React.FC = () => {
   }, [category]);
 
   const addThread = async (thread: Omit<Thread, 'category' | 'link' | 'id'>) => {
-    const newThread: Thread = { ...thread, category, link: generateRandomLink(category), id: 0 };
+    const newThread: Thread = { ...thread, category, link: randomString, id: 0 };
     const response = await fetch('http://localhost:5000/api/threads', {
       method: 'POST',
       headers: {

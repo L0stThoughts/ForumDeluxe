@@ -74,8 +74,6 @@ dbForum.query(`
   )
 `);
 
-
-
 app.get('/api/threads/:category', (req, res) => {
   const { category } = req.params;
   const query = 'SELECT * FROM threads WHERE category = ?';
@@ -102,9 +100,10 @@ app.post('/api/threads', (req, res) => {
   });
 });
 
+// Fetch a thread by link
 app.get('/api/threads/:link', (req, res) => {
   const { link } = req.params;
-  const query = 'SELECT * FROM threads WHERE link = ?';
+  const query = `SELECT * FROM threads WHERE link = ?`;
   dbForum.query(query, [link], (error, results) => {
     if (error) {
       console.error('Error fetching thread:', error);
@@ -115,23 +114,30 @@ app.get('/api/threads/:link', (req, res) => {
       res.status(404).json({ error: 'Thread not found' });
       return;
     }
-    res.json(results[0]);
+    console.log('Thread data received:', results); // Debugging
+    res.json(results);
   });
 });
 
-app.get('/api/replies/:threadId', (req, res) => {
-  const { threadId } = req.params;
-  const query = 'SELECT * FROM replies WHERE thread_id = ?';
-  dbForum.query(query, [threadId], (error, results) => {
+app.get('/api/replies/:link', (req, res) => {
+  const { link } = req.params;
+  const query = `
+    SELECT r.* FROM replies r
+    JOIN threads t ON r.thread_id = t.id
+    WHERE t.link = ?
+  `;
+  dbForum.query(query, [link], (error, results) => {
     if (error) {
       console.error('Error fetching replies:', error);
       res.status(500).json({ error: 'Error fetching replies' });
       return;
     }
+    console.log('Replies data received:', results); // Debugging
     res.json(results);
   });
 });
 
+// Create a new reply
 app.post('/api/replies', (req, res) => {
   const { threadId, content } = req.body;
   console.log('Received payload:', req.body);
