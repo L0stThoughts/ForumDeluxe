@@ -1,4 +1,4 @@
 @echo off
-cd final\src\components\login
+cd src\components\login
 node server.js
 pause
