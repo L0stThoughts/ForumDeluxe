@@ -17,12 +17,11 @@ git clone {url}
 npm install
 
 ## Run the application:
-cd /final
 npm run dev
 
-after this run startDatabaseServer.bat
-or go to the directory /src/components/login and "node server.js"
-This will start the development server. Open your browser and navigate to http://localhost:3000 to see the application.
+after this in your database create database forum and user_auth,
+then either startDatabaseServer.bat or go to the directory /src/components/login and "node server.js"
+This will start the development database server. Open your browser and navigate to http://localhost:3000 to see the application.
 
 
 ## Project Structure
